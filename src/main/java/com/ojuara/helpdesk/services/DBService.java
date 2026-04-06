@@ -26,8 +26,6 @@ public class DBService {
 
 	@Autowired
 	private ChamadoRepository chamadoRepository;
-
-
     
     public void instanciaDB(){
         Tecnico t1 = new Tecnico();
