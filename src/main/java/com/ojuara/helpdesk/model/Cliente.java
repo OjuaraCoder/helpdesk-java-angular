@@ -5,8 +5,13 @@ import java.util.List;
 
 import com.ojuara.helpdesk.enums.PerfilEnum;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Cliente extends Pessoa {
 
+    @OneToMany(mappedBy = "cliente")
     private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente() {
