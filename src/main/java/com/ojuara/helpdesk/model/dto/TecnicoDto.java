@@ -10,13 +10,25 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ojuara.helpdesk.enums.PerfilEnum;
 import com.ojuara.helpdesk.model.Tecnico;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class TecnicoDto implements Serializable {
 
     private Integer id;
+    @NotNull(message = "O campo nome é obrigatorio")
+    @NotBlank(message = "O campo nome não pode conter espaços em branco")
     private String nome;
+    @NotNull(message = "O campo cpf é obrigatorio")
+    @NotBlank(message = "O campo cpf não pode conter espaços em branco")
     private String cpf;
+    @NotNull(message = "O campo email é obrigatorio")
+    @NotBlank(message = "O campo email não pode conter espaços em branco")
     private String email;
+    @NotNull(message = "O campo senha é obrigatorio")
+    @NotBlank(message = "O campo senha não pode conter espaços em branco")
     private String senha;
+    
     private Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
