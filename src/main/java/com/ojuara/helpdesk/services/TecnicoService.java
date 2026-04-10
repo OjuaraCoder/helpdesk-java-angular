@@ -43,7 +43,15 @@ public class TecnicoService {
         
         Tecnico newObj = new Tecnico(tecnicoDto);
         return repository.save(newObj);
+    }
 
+    public Tecnico update(Integer id, TecnicoDto obj) {
+        obj.setId(id);
+
+        Tecnico oldObj = findById(id);
+        validaCpfEmail(obj);
+        oldObj = new Tecnico(obj);
+        return repository.save(oldObj);
     }
 
     private void validaCpfEmail(TecnicoDto tecnicoDto) {
@@ -59,4 +67,12 @@ public class TecnicoService {
         }
     }
 
+    public void delete(Integer id) {
+        Tecnico obj = findById(id);
+        if(obj.getChamados().size() > 0){
+            throw new DataIntegrityViolationException("Tecnico possui ordem de serviço, operação cancelada");
+        }
+        repository.delete(obj);
+
+    }
 }
