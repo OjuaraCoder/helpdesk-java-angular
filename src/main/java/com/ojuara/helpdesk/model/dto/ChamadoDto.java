@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ojuara.helpdesk.enums.PrioridadeEnum;
-import com.ojuara.helpdesk.enums.StatusEnum;
 import com.ojuara.helpdesk.model.Chamado;
+
+import jakarta.validation.constraints.NotNull;
 
 
 public class ChamadoDto implements Serializable {
@@ -19,13 +19,25 @@ public class ChamadoDto implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataFechamento;
     
-    private PrioridadeEnum prioridade;
-    private StatusEnum status;
+    @NotNull(message = "O campo PRIORIDADE é requerido")
+    private Integer prioridade;
+
+    @NotNull(message = "O campo STATUS é requerido")
+    private Integer status;
+
+    @NotNull(message = "O campo TITULO é requerido")
     private String titulo;
+
+    @NotNull(message = "O campo OBSERVACOES é requerido")
     private String observacoes;
+
+    @NotNull(message = "O campo TECNICO é requerido")    
     private Integer tecnico;
-    private String nomeTecnico;
+
+    @NotNull(message = "O campo CLIENTE é requerido")
     private Integer cliente;
+
+    private String nomeTecnico;
     private String nomeCliente;
 
     public ChamadoDto() {
@@ -37,8 +49,8 @@ public class ChamadoDto implements Serializable {
         this.id = obj.getId();
         this.dataAbertura = obj.getDataAbertura();
         this.dataFechamento = obj.getDataFechamento();
-        this.prioridade = obj.getPrioridade();
-        this.status = obj.getStatus();
+        this.prioridade = obj.getPrioridade().getCodigo();
+        this.status = obj.getStatus().getCodigo();
         this.titulo = obj.getTitulo();
         this.observacoes = obj.getObservacoes();
         this.tecnico = obj.getTecnico().getId();
@@ -72,19 +84,19 @@ public class ChamadoDto implements Serializable {
         this.dataFechamento = dataFechamento;
     }
 
-    public PrioridadeEnum getPrioridade() {
+    public Integer getPrioridade() {
         return prioridade;
     }
 
-    public void setPrioridade(PrioridadeEnum prioridade) {
+    public void setPrioridade(Integer prioridade) {
         this.prioridade = prioridade;
     }
 
-    public StatusEnum getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
