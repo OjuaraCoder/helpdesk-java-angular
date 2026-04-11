@@ -15,11 +15,7 @@ import com.ojuara.helpdesk.model.Cliente;
 import com.ojuara.helpdesk.model.Tecnico;
 import com.ojuara.helpdesk.model.dto.ChamadoDto;
 import com.ojuara.helpdesk.repositories.ChamadoRepository;
-import com.ojuara.helpdesk.repositories.ClienteRepository;
-import com.ojuara.helpdesk.repositories.TecnicoRepository;
 import com.ojuara.helpdesk.services.exceptions.ObjectNotFoundException;
-
-import jakarta.validation.Valid;
 
 @Service
 public class ChamadoService {

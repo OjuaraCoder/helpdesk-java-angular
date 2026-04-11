@@ -3,12 +3,9 @@ package com.ojuara.helpdesk.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ojuara.helpdesk.enums.PerfilEnum;
 import com.ojuara.helpdesk.model.dto.ClienteDto;
-import com.ojuara.helpdesk.model.dto.TecnicoDto;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 

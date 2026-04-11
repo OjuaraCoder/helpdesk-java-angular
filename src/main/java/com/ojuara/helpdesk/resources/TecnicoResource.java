@@ -35,7 +35,6 @@ public class TecnicoResource {
     public ResponseEntity<TecnicoDto> findById(@PathVariable Integer id) {
         Tecnico obj = service.findById(id);
         return ResponseEntity.ok().body(new TecnicoDto(obj));
-
     }
 
     @GetMapping
@@ -51,7 +50,6 @@ public class TecnicoResource {
         Tecnico newObj = service.create(tecnicoDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
         return ResponseEntity.created(uri).build();
-
     }
 
     @PutMapping(value = "/{id}")
@@ -65,7 +63,4 @@ public class TecnicoResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
-
-
 }
