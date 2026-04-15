@@ -36,7 +36,7 @@ public class DBService {
 		t1.setNome("Ojuara");
 		t1.setCpf("59976957009");
 		t1.setEmail("teste@gmail.com");
-		t1.setSenha(encoder.encode("123"));
+		t1.setSenha(encoder.encode("12345"));
 		t1.addPerfil(PerfilEnum.TECNICO);
 
         Tecnico t2 = new Tecnico();
@@ -50,7 +50,7 @@ public class DBService {
 		t3.setNome("Rodrigues");
 		t3.setCpf("67194322064");
 		t3.setEmail("rodrigues@gmail.com");
-		t3.setSenha(encoder.encode("777"));
+		t3.setSenha(encoder.encode("77788"));
 		t3.addPerfil(PerfilEnum.TECNICO);
 
 		Cliente c1 = new Cliente();
@@ -58,13 +58,13 @@ public class DBService {
 		c1.setCpf("11223344556");
 		c1.setEmail("cliente@gmail.com");
 		c1.addPerfil(PerfilEnum.CLIENTE);
-		c1.setSenha(encoder.encode("123"));
+		c1.setSenha(encoder.encode("12355"));
 
         Cliente c2 = new Cliente();
 		c2.setNome("Nira");
 		c2.setCpf("63989322001");
 		c2.setEmail("nira@gmail.com");
-		c2.setSenha(encoder.encode("789"));
+		c2.setSenha(encoder.encode("78910"));
 		c2.addPerfil(PerfilEnum.CLIENTE);
 
 		tecnicoRepository.saveAll(Arrays.asList(t1,t2,t3));

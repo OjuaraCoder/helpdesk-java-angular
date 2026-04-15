@@ -25,7 +25,7 @@ public class JWTUtil {
         return Jwts.builder()
                 .subject(email)
                 .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSigningKey(), Jwts.SIG.HS512)
+                .signWith(getSigningKey(), Jwts.SIG.HS256)
                 .compact();
     }
 
@@ -47,6 +47,14 @@ public class JWTUtil {
 		return false;
 	}
 
+	public String getUsername(String token) {
+		Claims claims = getClaims(token);
+		if(claims != null) {
+			return claims.getSubject();
+		}
+		return null;
+	}
+
 	private Claims getClaims(String token) {
 		try {
 			return Jwts.parser()
@@ -59,11 +67,5 @@ public class JWTUtil {
 		}
 	}
 
-	public String getUsername(String token) {
-		Claims claims = getClaims(token);
-		if(claims != null) {
-			return claims.getSubject();
-		}
-		return null;
-	}
+
 }

@@ -25,7 +25,7 @@ public class TecnicoService {
     private PessoaRepository pessoaRepository;
 
 	@Autowired
-	private BCryptPasswordEncoder encoder;    
+	private BCryptPasswordEncoder encoder;
 
     public Tecnico findById(Integer id) {
         Optional<Tecnico> obj = repository.findById(id);

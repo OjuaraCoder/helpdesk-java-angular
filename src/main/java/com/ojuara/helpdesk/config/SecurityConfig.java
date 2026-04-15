@@ -8,10 +8,12 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -19,13 +21,14 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.ojuara.helpdesk.security.JWTAuthenticationFilter;
+import com.ojuara.helpdesk.security.JWTAuthorizationFilter;
 import com.ojuara.helpdesk.security.JWTUtil;
-import com.ojuara.helpdesk.services.UserDetailsServiceImpl;
 
 import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS = { "/h2/**" };
@@ -34,7 +37,7 @@ public class SecurityConfig {
     private JWTUtil jwtUtil;
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private UserDetailsService userDetailsService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
@@ -44,6 +47,7 @@ public class SecurityConfig {
             .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
             .authenticationProvider(authenticationProvider())
             .addFilter(new JWTAuthenticationFilter(authenticationManager, jwtUtil))
+            .addFilter(new JWTAuthorizationFilter(authenticationManager, jwtUtil, userDetailsService))
             .authorizeHttpRequests(authorize -> authorize
                     .requestMatchers(PUBLIC_MATCHERS).permitAll()
                     .anyRequest().authenticated())
