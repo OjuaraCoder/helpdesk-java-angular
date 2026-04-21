@@ -51,10 +51,13 @@ public class TecnicoService {
 
     public Tecnico update(Integer id, TecnicoDto obj) {
         obj.setId(id);
-
         Tecnico oldObj = findById(id);
+
+        if(!oldObj.getSenha().equals(obj.getSenha())){
+            obj.setSenha(encoder.encode(obj.getSenha()));
+        }
+
         validaCpfEmail(obj);
-        obj.setSenha(encoder.encode(obj.getSenha()));
         oldObj = new Tecnico(obj);
         return repository.save(oldObj);
     }

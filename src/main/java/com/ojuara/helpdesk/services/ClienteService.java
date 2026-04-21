@@ -53,8 +53,12 @@ public class ClienteService {
         obj.setId(id);
 
         Cliente oldObj = findById(id);
+
+        if(!oldObj.getSenha().equals(obj.getSenha())){
+            obj.setSenha(encoder.encode(obj.getSenha()));
+        }
+
         validaCpfEmail(obj);
-        obj.setSenha(encoder.encode(obj.getSenha()));
         oldObj = new Cliente(obj);
         return repository.save(oldObj);
     }

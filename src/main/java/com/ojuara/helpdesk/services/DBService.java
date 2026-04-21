@@ -38,6 +38,7 @@ public class DBService {
 		t1.setEmail("teste@gmail.com");
 		t1.setSenha(encoder.encode("12345"));
 		t1.addPerfil(PerfilEnum.TECNICO);
+		t1.addPerfil(PerfilEnum.ADMIN);
 
         Tecnico t2 = new Tecnico();
 		t2.setNome("Clara");
